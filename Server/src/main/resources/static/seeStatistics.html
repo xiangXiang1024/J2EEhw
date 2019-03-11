@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>运营情况</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <style>
+        body {
+            padding-top: 50px;
+            padding-left: 50px;
+        }
+    </style>
+
+    <script src="js/user.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/seeStatistics.js"></script>
+    <script src="js/echarts.min.js"></script>
+</head>
+<body>
+    <!--<script>localStorage.userId="admin";</script>-->
+    <!--顶部-->
+    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/index.html">Yummy!</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <!--<li><a href="/index.html"><span class="glyphicon glyphicon-home"></span> 首页</a></li>-->
+                    <!--<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> 购物广场</a></li>-->
+                    <li><a href="/approveInfo.html"><span class="glyphicon glyphicon-user"></span> <script>document.writeln(getUserName());</script></a></li>
+                    <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> 登出</a></li>
+                </ul>
+            </div><!-- /.nav-collapse -->
+        </div><!-- /.container -->
+    </div>
+
+    <div class="container">
+        <div class="row" style="margin-top: 5%">
+
+            <!--左部导航-->
+            <div class="col-xs-2" id="myScrollspy">
+                <ul class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="30%" style="background-color: #fff">
+                    <li><a href="/approveInfo.html">审批信息</a></li>
+                    <li class="active"><a href="#">运营情况</a></li>
+                </ul>
+            </div>
+
+            <!--右部内容-->
+            <div class="col-md-9">
+                <!--我的订单-->
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a href="#canteen" data-toggle="tab" onclick="getMonthCanteenStatistics(6)">
+                            餐厅统计
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#client" data-toggle="tab" onclick="getMonthClientStatistics(6)">
+                            会员统计
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#finance" data-toggle="tab" onclick="getMonthFinanceStatistics(6)">
+                            财务统计
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="tab-content">
+                    <!--餐厅统计-->
+                    <div class="tab-pane fade in active" id="canteen">
+
+                        <!--餐厅数量 折线图 line-->
+                        <div id="canteen_num_line" style="width: 80%;height: 400%; margin-left: 5%; margin-top: 5%"></div>
+
+                        <script>getMonthCanteenStatistics(6);</script>
+
+                    </div>
+
+                    <!--会员统计-->
+                    <div class="tab-pane fade" id="client">
+                        <div>
+                            <!--会员数量 折线图 line-->
+                            <div id="client_num_line" style="width: 678%;height: 400%; margin-left: 5%; margin-top: 5%"></div>
+                        </div>
+                        <div>
+                            <!--会员等级 带时间轴的饼图 -->
+                            <div id="client_ranking_timepie" style="width: 678%;height: 400%; margin-left: 5%; margin-top: 5%"></div>
+                        </div>
+                    </div>
+
+                    <!--财务统计-->
+                    <div class="tab-pane fade" id="finance">
+                        <div>
+                            <!--平台收入 折线图 line-->
+                            <div id="income_line" style="width: 678%;height: 400%; margin-left: 5%; margin-top: 5%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

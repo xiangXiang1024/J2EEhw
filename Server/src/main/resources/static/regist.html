@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <style>
+        body {
+            padding-top: 50px;
+            padding-left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <!--顶部-->
+    <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/index.html">Yummy!</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <!--<li><a href="/index.html"><span class="glyphicon glyphicon-home"></span> 首页</a></li>-->
+                    <!--<li><a href="#shop"><span class="glyphicon glyphicon-shopping-cart"></span> Shop</a></li>-->
+                    <!--<li><a href="#support"><span class="glyphicon glyphicon-headphones"></span> Support</a></li>-->
+                    <li><a href="/login.html"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+                    <li class="active"><a href="#"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
+
+                    <!--<li><a href="#userspace"><span class="glyphicon glyphicon-user"></span>用户A</a></li>-->
+                </ul>
+            </div><!-- /.nav-collapse -->
+        </div><!-- /.container -->
+    </div>
+
+    <div class="mainbody" style="margin-top: 3%">
+        <div class="col-md-1">
+        </div>
+
+        <!--注册表单-->
+        <div class="col-md-9">
+
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#client" data-toggle="tab">
+                        会员
+                    </a>
+                </li>
+                <li>
+                    <a href="#canteen" data-toggle="tab">
+                        餐厅
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <!--会员注册表单-->
+                <div class="tab-pane fade in active" id="client">
+
+                    <div class="row">
+                        <div class="col-md-1">
+                        </div>
+
+                        <div class="col-md-8">
+                            <form class="form-horizontal" role="form" style="margin-top: 5%">
+                                <div class="form-group">
+                                    <label for="name" class="col-sm-2 control-label" style="margin-left: 5%">昵称</label>
+                                    <div class="col-sm-10 col-lg-8">
+                                        <input type="text" class="form-control" id="name" placeholder="请输入昵称">
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="margin-top: 5%">
+                                    <label for="password" class="col-sm-2 control-label" style="margin-left: 5%; ">密码</label>
+                                    <div class="col-sm-10 col-lg-8">
+                                        <input type="password" class="form-control" id="password" placeholder="请输入密码">
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group" style="margin-top: 5%">
+                                    <label for="realName" class="col-sm-2 control-label" style="margin-left: 5%">姓名</label>
+                                    <div class="col-sm-10 col-lg-8">
+                                        <input type="text" class="form-control" id="realName" placeholder="请输入姓名">
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="margin-top: 5%">
+                                    <label for="phone" class="col-sm-2 control-label" style="margin-left: 5%">手机</label>
+                                    <div class="col-sm-10 col-lg-8">
+                                        <input type="text" class="form-control" id="phone" placeholder="请输入手机号">
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="margin-top: 5%">
+                                    <label for="e_mail" class="col-sm-2 control-label" style="margin-left: 5%">邮箱</label>
+                                    <div class="col-sm-10 col-lg-8">
+                                        <input type="text" class="form-control" id="e_mail" placeholder="请输入邮箱">
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="margin-top: 5%">
+                                    <label for="code" class="col-sm-2 control-label" style="margin-left: 5%">验证码</label>
+                                    <div class="col-sm-10 col-lg-8">
+                                        <input type="text" class="form-control" id="code" placeholder="请输入验证码">
+                                    </div>
+                                </div>
+
+
+                            </form>
+
+                            <div style="margin-top: 5%; margin-left: 22.5%">
+                                <button class="btn btn-default" onclick="sendEmail()">
+                                    验证
+                                </button>
+
+                                <button class="btn btn-default" style="margin-left:30%" onclick="clientRegist()">
+                                    注册
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--餐厅注册表单-->
+                <div class="tab-pane fade" id="canteen">
+                    <div class="row">
+                        <div class="col-md-1">
+                        </div>
+
+                        <div class="col-md-8">
+                            <form class="form-horizontal" role="form" style="margin-top: 5%">
+                                <div class="form-group">
+                                    <label for="name2" class="col-sm-2 control-label" style="margin-left: 5%">名称</label>
+                                    <div class="col-sm-10 col-lg-8">
+                                        <input type="text" class="form-control" id="name2" placeholder="请输入餐厅名">
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="margin-top: 5%">
+                                    <label for="password2" class="col-sm-2 control-label" style="margin-left: 5%; ">密码</label>
+                                    <div class="col-sm-10 col-lg-8">
+                                        <input type="password" class="form-control" id="password2" placeholder="请输入密码">
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="margin-top: 5%">
+                                    <label for="type2" class="col-sm-2 control-label" style="margin-left: 5%">类型</label>
+                                    <select id="type2" class="selectpicker show-tick form-control col-sm-10 col-lg-8" data-live-search="true" style="margin-left:2.5%;max-width:62%">
+                                        <option>自助餐厅</option>
+                                        <option>中餐厅</option>
+                                        <option>西餐厅</option>
+                                        <option>小吃店</option>
+                                        <option>甜品店</option>
+                                        <option>快餐厅</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group" style="margin-top: 5%">
+                                    <label for="district2" class="col-sm-2 control-label" style="margin-left: 5%">街道</label>
+                                    <select id="district2" class="selectpicker show-tick form-control col-sm-10 col-lg-8" data-live-search="true" style="margin-left:2.5%;max-width:62%">
+                                        <option>玄武区</option>
+                                        <option>秦淮区</option>
+                                        <option>鼓楼区</option>
+                                        <option>建邺区</option>
+                                        <option>栖霞区</option>
+                                        <option>雨花台区</option>
+                                        <option>浦口区</option>
+                                        <option>江宁区</option>
+                                        <option>六合区</option>
+                                        <option>溧水区</option>
+                                        <option>高淳区</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group" style="margin-top: 5%">
+                                    <label for="address2" class="col-sm-2 control-label" style="margin-left: 5%">地址</label>
+                                    <div class="col-sm-10 col-lg-8">
+                                     <!--   <span class="input-group-addon">￥</span>
+                                        <input type="text" class="form-control" id="address2" placeholder="请输入地址">
+                                        <span class="input-group-addon">.00</span>-->
+                                        <input type="text" class="form-control" id="address2" placeholder="请输入地址">
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="margin-top: 5%">
+                                    <label for="shippingFee2" class="col-sm-2 control-label" style="margin-left: 5%">配送费</label>
+                                    <div class="input-group col-sm-10 col-lg-8" style="margin-left: 24%;max-width: 62%">
+                                        <span class="input-group-addon">￥</span>
+                                        <input type="text" class="form-control" id="shippingFee2" placeholder="请输入配送费">
+                                        <span class="input-group-addon">.00</span>
+                                        <!--<input type="text" class="form-control" id="shippingFee2" placeholder="请输入配送费">-->
+                                    </div>
+                                </div>
+
+                                <div class="form-group" style="margin-top: 5%">
+                                    <label for="packagingFee2" class="col-sm-2 control-label" style="margin-left: 5%">包装费</label>
+                                    <div class="input-group col-sm-10 col-lg-8" style="margin-left: 24%;max-width: 62%">
+                                        <!--<input type="text" class="form-control" id="packagingFee2" placeholder="请输入包装费">-->
+                                        <span class="input-group-addon">￥</span>
+                                        <input type="text" class="form-control" id="packagingFee2" placeholder="请输入包装费">
+                                        <span class="input-group-addon">.00</span>
+                                    </div>
+                                </div>
+
+
+                            </form>
+
+                            <div style="margin-top: 5%; margin-left: 20%">
+                                <button class="btn btn-default" style="margin-left:30%" onclick="canteenRegist()">
+                                    注册
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/regist.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</body>
+</html>

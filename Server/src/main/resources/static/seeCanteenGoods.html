@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的信息</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <style>
+        body {
+            padding-top: 50px;
+            padding-left: 50px;
+        }
+    </style>
+
+    <script src="js/user.js"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/seeCanteenGoods.js"></script>
+    <script src="js/layDate-v5.0.9/laydate/laydate.js"></script>
+</head>
+<body>
+<!--顶部-->
+<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/index.html">Yummy!</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <!--<li><a href="/index.html"><span class="glyphicon glyphicon-home"></span> 首页</a></li>-->
+                <!--<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> 购物广场</a></li>-->
+                <li><a href="/seeCanteenOrder.html"><span class="glyphicon glyphicon-user"></span> <script>document.writeln(getUserName());</script></a></li>
+                <li><a href="#" onclick="logout()"><span class="glyphicon glyphicon-log-out"></span> 登出</a></li>
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</div>
+
+<div class="container">
+    <div class="row" style="margin-top: 5%">
+
+        <!--左部导航-->
+        <div class="col-xs-2" id="myScrollspy" >
+            <ul class="nav nav-tabs nav-stacked" data-spy="affix" data-offset-top="30%" style="background-color: #fff">
+                <li><a href="/seeCanteenOrder.html">送餐记录</a></li>
+                <li><a href="/seeCanteenInfo.html">我的信息</a></li>
+                <li class="active"><a href="#">我的商品</a></li>
+                <li><a href="/seeCanteenStatistics.html">运营情况</a></li>
+            </ul>
+        </div>
+
+        <!--右部内容-->
+        <div class="col-md-9">
+            <!--tab-->
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#commodity" data-toggle="tab" onclick="getGoodsDetailInfo();">
+                        商品
+                    </a>
+                </li>
+                <li>
+                    <a href="#setmeal" data-toggle="tab" onclick="getSetMeal();getGoodsInfo();">
+                        套餐
+                    </a>
+                </li>
+                <li>
+                    <a href="#offer" data-toggle="tab">
+                        优惠
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <!--商品-->
+                <div class="tab-pane fade in active" id="commodity">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>类别</th>
+                            <th>单价</th>
+                            <th>每日限量</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
+                        </tr>
+                        </thead>
+                        <tbody id = "commodityTable">
+
+                        </tbody>
+
+                        <script>getGoodsDetailInfo();</script>
+
+                    </table>
+
+                    <div style="text-align:center; margin-top: 5%">
+                        <button type="button" class="btn btn-default"data-toggle="modal" data-target="#addCommodity" onclick="canAddInfo()">
+                            添加商品
+                        </button>
+                    </div>
+
+                    <!-- 模态框（Modal） -->
+                    <div class="modal fade" id="addCommodity" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">
+                                        添加商品
+                                    </h4>
+                                </div>
+                                <!--添加商品的表单-->
+                                <div class="modal-body">
+                                    <form class="form-horizontal" role="form" style="margin-top: 5%">
+                                        <div class="form-group">
+                                            <label for="name" class="col-sm-2 control-label" style="margin-left: 5%">名称</label>
+                                            <div class="col-sm-10 col-lg-8">
+                                                <input type="text" class="form-control" id="name" placeholder="请输入商品名称">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" style="margin-top: 5%">
+                                            <label for="price" class="col-sm-2 control-label" style="margin-left: 5%; ">价格</label>
+                                            <div class="input-group col-sm-10 col-lg-8" style="margin-left: 24%;max-width: 62%">
+                                                <input type="text" class="form-control" id="price" placeholder="请输入商品价格">
+                                                <span class="input-group-addon">元</span>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group" style="margin-top: 5%">
+                                            <label for="type" class="col-sm-2 control-label" style="margin-left: 5%">类别</label>
+                                            <select id="type" class="selectpicker show-tick form-control col-sm-10 col-lg-8" data-live-search="true" style="margin-left:2%;max-width:62%">
+                                                <option>饮料</option>
+                                                <option>主食</option>
+                                                <option>甜点</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group" style="margin-top: 5%">
+                                            <label for="description" class="col-sm-2 control-label" style="margin-left: 5%">描述</label>
+                                            <div class="col-sm-10 col-lg-8">
+                                                <input type="text" class="form-control" id="description" placeholder="请输入商品描述">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" style="margin-top: 5%">
+                                            <label for="quantity" class="col-sm-2 control-label" style="margin-left: 5%">限额</label>
+                                            <div class="input-group col-sm-10 col-lg-8" style="margin-left: 24%;max-width: 62%">
+                                                <input type="number" class="form-control" id="quantity" value='0' min="1">
+                                                <span class="input-group-addon">个/日</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" style="margin-top: 5%">
+
+                                                <label for="start" class="col-sm-2 control-label" style="margin-left: 5%">开始时间</label>
+                                                <div class="input-group col-sm-10 col-lg-8" style="margin-left: 24%;max-width: 62%">
+                                                    <input type="text" class="form-control" id="start" placeholder="请选择开始时间">
+                                                </div>
+                                        </div>
+
+                                        <div class="form-group" style="margin-top: 5%">
+
+                                                <label for="end" class="col-sm-2 control-label" style="margin-left: 5%">结束时间</label>
+                                                <div class="input-group col-sm-10 col-lg-8" style="margin-left: 24%;max-width: 62%">
+                                                    <input type="text" class="form-control" id="end" placeholder="请选择结束时间">
+                                                </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                        取消
+                                    </button>
+                                    <button type="button" class="btn btn-primary" onclick="addCommodity()" data-dismiss="modal">
+                                        确认添加
+                                    </button>
+                                </div>
+                            </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+
+                <!--套餐-->
+                <div class="tab-pane fade" id="setmeal">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>套餐名</th>
+                            <th>商品</th>
+                            <th>数量</th>
+                            <th>金额</th>
+                            <th>每日限量</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
+                        </tr>
+                        </thead>
+                        <tbody id = "setmealtable">
+
+                        </tbody>
+
+                        <script>getSetMeal()</script>
+                    </table>
+                    <div style="text-align:center">
+                        <button type="button" class="btn btn-default"data-toggle="modal" data-target="#addSetMeal" onclick="canAddInfo()">
+                            添加套餐
+                        </button>
+                    </div>
+
+                    <!-- 模态框（Modal） -->
+                    <div class="modal fade" id="addSetMeal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel2">
+                                        添加套餐
+                                    </h4>
+                                </div>
+                                <!--添加商品的表单-->
+                                <div class="modal-body">
+                                    <form class="form-horizontal" role="form" style="margin-top: 5%">
+                                        <div class="form-group">
+                                            <label for="name2" class="col-sm-2 control-label" style="margin-left: 5%">名称</label>
+                                            <div class="col-sm-10 col-lg-8">
+                                                <input type="text" class="form-control" id="name2" placeholder="请输入套餐名称">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" style="margin-top: 5%">
+                                            <label for="price2" class="col-sm-2 control-label" style="margin-left: 5%; ">价格</label>
+                                            <div class="input-group col-sm-10 col-lg-8" style="margin-left: 24%;max-width: 62%">
+                                                <input type="text" class="form-control" id="price2" placeholder="请输入套餐价格">
+                                                <span class="input-group-addon">元</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" style="margin-top: 5%">
+                                            <label for="description2" class="col-sm-2 control-label" style="margin-left: 5%">描述</label>
+                                            <div class="col-sm-10 col-lg-8">
+                                                <input type="text" class="form-control" id="description2" placeholder="请输入套餐描述">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" style="margin-top: 5%">
+                                            <label for="quantity2" class="col-sm-2 control-label" style="margin-left: 5%">限额</label>
+                                            <div class="input-group col-sm-10 col-lg-8" style="margin-left: 24%;max-width: 62%">
+                                                <input type="number" class="form-control" id="quantity2" value='0' min="1">
+                                                <span class="input-group-addon">个/日</span>
+                                            </div>
+                                        </div>
+                                        <!--添加商品-->
+                                        <div class="form-group" style="margin-top: 5%">
+                                            <div class="form-inline">
+                                                <label class="col-sm-1 control-label" for="foodChoice2" style="min-width: 10%; margin-left: 12%">
+                                                    商品
+                                                </label>
+                                                <select id="foodChoice2" class="col-sm-1 selectpicker show-tick form-control" data-live-search="true" style="min-width: 20%; margin-left: 2%">
+                                                    <!--<option>饮料</option>
+                                                    <option>主食</option>
+                                                    <option>甜点</option>-->
+                                                </select>
+                                                <label class="col-sm-1 control-label" for="num2" style="min-width: 10%">
+                                                    数量
+                                                </label>
+                                                <input type="col-sm-1 number" class="form-control" id="num2" min="1" style="max-width: 20%">
+                                                <a class="col-sm-1 btn btn-default" style="float: right; margin-right: 14%" onclick="addSetMealCommodity();">
+                                                    添加
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <!--套餐商品-->
+                                        <div class="form-group" style="margin-top: 5%">
+                                            <label for="goodsList2" class="col-sm-2 control-label" style="margin-left: 5%">商品</label>
+                                            <table class="table table-striped" id="goodsList2" style="margin-left: 24%; max-width: 62%">
+                                                <thead>
+                                                <tr>
+                                                    <th>名称</th>
+                                                    <th>数量</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody id="goods2">
+                                                <!--<tr>
+                                                    <td>Tanmay</td>
+                                                    <td>1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Sachin</td>
+                                                    <td>2</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Uma</td>
+                                                    <td>3</td>
+                                                </tr>-->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="form-group" style="margin-top: 5%">
+
+                                            <label for="start2" class="col-sm-2 control-label" style="margin-left: 5%">开始时间</label>
+                                            <div class="input-group col-sm-10 col-lg-8" style="margin-left: 24%;max-width: 62%">
+                                                <input type="text" class="form-control" id="start2" placeholder="请选择开始时间">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" style="margin-top: 5%">
+
+                                            <label for="end2" class="col-sm-2 control-label" style="margin-left: 5%">结束时间</label>
+                                            <div class="input-group col-sm-10 col-lg-8" style="margin-left: 24%;max-width: 62%">
+                                                <input type="text" class="form-control" id="end2" placeholder="请选择结束时间">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                        取消
+                                    </button>
+                                    <button type="button" class="btn btn-primary" onclick="addSetMeal();" data-dismiss="modal">
+                                        确认添加
+                                    </button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+                </div>
+
+                <!--优惠-->
+                <div class="tab-pane fade" id="offer">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>描述</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
+                        </tr>
+                        </thead>
+                        <tbody id = "offerTable">
+
+                        </tbody>
+
+                        <script>getOffers()</script>
+                    </table>
+                    <div style="text-align:center">
+                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addOffer" onclick="canAddInfo()">
+                            添加优惠
+                        </button>
+                    </div>
+
+                    <!-- 模态框（Modal） -->
+                    <div class="modal fade" id="addOffer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    <h4 class="modal-title" id="myModalLabel3">添加优惠</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-group" style="margin-top: 5%">
+                                        <label for="base3" class="col-sm-2 control-label" style="margin-left: 5%; ">满</label>
+                                        <div class="input-group col-sm-10 col-lg-8" style="margin-left: 24%;max-width: 62%">
+                                            <input type="text" class="form-control" id="base3">
+                                            <span class="input-group-addon">元</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" style="margin-top: 5%">
+                                        <label for="discount3" class="col-sm-2 control-label" style="margin-left: 5%; ">减</label>
+                                        <div class="input-group col-sm-10 col-lg-8" style="margin-left: 24%;max-width: 62%">
+                                            <input type="text" class="form-control" id="discount3">
+                                            <span class="input-group-addon">元</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" style="margin-top: 5%">
+                                        <label for="start3" class="col-sm-2 control-label" style="margin-left: 5%">开始时间</label>
+                                        <div class="input-group col-sm-10 col-lg-8" style="margin-left: 24%;max-width: 62%">
+                                            <input type="text" class="form-control" id="start3" placeholder="请选择开始时间">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" style="margin-top: 5%">
+                                        <label for="end3" class="col-sm-2 control-label" style="margin-left: 5%">结束时间</label>
+                                        <div class="input-group col-sm-10 col-lg-8" style="margin-left: 24%;max-width: 62%">
+                                            <input type="text" class="form-control" id="end3" placeholder="请选择结束时间">
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addOffer()">确认添加</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+
+<!--
+                    &lt;!&ndash; 模态框（Modal） &ndash;&gt;
+                    <div class="modal fade" id="添加优惠" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel3">
+                                        添加优惠
+                                    </h4>
+                                </div>
+                                &lt;!&ndash;添加商品的表单&ndash;&gt;
+                                <div class="modal-body">
+                                    <form class="form-horizontal" role="form" style="margin-top: 5%">
+                                        &lt;!&ndash;描述&ndash;&gt;
+                                        <div class="form-group" style="margin-top: 5%">
+                                            <label for="description3" class="col-sm-2 control-label" style="margin-left: 5%">描述</label>
+                                            <div class="col-sm-10 col-lg-8">
+                                                <input type="text" class="form-control" id="description3" placeholder="请输入套餐描述">
+                                            </div>
+                                        </div>
+                                        &lt;!&ndash;开始时间&ndash;&gt;
+                                        <div class="form-group" style="margin-top: 5%">
+
+                                            <label for="start3" class="col-sm-2 control-label" style="margin-left: 5%">开始时间</label>
+                                            <div class="input-group col-sm-10 col-lg-8" style="margin-left: 24%;max-width: 62%">
+                                                <input type="text" class="form-control" id="start3" placeholder="请选择开始时间">
+                                            </div>
+                                        </div>
+                                        &lt;!&ndash;结束时间&ndash;&gt;
+                                        <div class="form-group" style="margin-top: 5%">
+                                            <label for="end3" class="col-sm-2 control-label" style="margin-left: 5%">结束时间</label>
+                                            <div class="input-group col-sm-10 col-lg-8" style="margin-left: 24%;max-width: 62%">
+                                                <input type="text" class="form-control" id="end3" placeholder="请选择结束时间">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                        取消
+                                    </button>
+                                    <button type="button" class="btn btn-primary" onclick="addOffer();" data-dismiss="modal">
+                                        确认添加
+                                    </button>
+                                </div>
+                            </div>&lt;!&ndash;modal-content&ndash;&gt;
+                        </div>&lt;!&ndash;modal&ndash;&gt;
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    lay('#version').html('-v'+ laydate.v);
+
+    laydate.render({
+        elem: '#start'
+    });
+
+    laydate.render({
+        elem: '#end'
+    });
+
+    laydate.render({
+        elem: '#start2'
+    });
+
+    laydate.render({
+        elem: '#end2'
+    });
+
+    laydate.render({
+        elem: '#start3'
+    });
+
+    laydate.render({
+        elem: '#end3'
+    });
+</script>
+
+<script>getGoodsInfo();</script>
+</body>
+</html>
